@@ -241,4 +241,4 @@ Possible next steps for this project include:
 ## Author
 
 Sukhpreet Sandhu  
-BSc Computer Science – University of Calgary
+BSc Computer Science:  University of Calgary
