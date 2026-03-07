@@ -1,0 +1,67 @@
+-- =============================================
+-- Snowflake Environment Setup for MovieLens Project
+-- =============================================
+
+-- Step 1: Use admin role
+USE ROLE ACCOUNTADMIN;
+
+
+-- Step 2: Create transform role
+CREATE ROLE IF NOT EXISTS TRANSFORM;
+GRANT ROLE TRANSFORM TO ROLE ACCOUNTADMIN;
+
+
+-- Step 3: Create warehouse
+CREATE WAREHOUSE IF NOT EXISTS COMPUTE_WH;
+
+
+GRANT OPERATE ON WAREHOUSE COMPUTE_WH
+TO ROLE TRANSFORM;
+
+
+-- Step 4: Create dbt service user
+CREATE USER IF NOT EXISTS dbt
+  PASSWORD = '<your_password_here>'
+  LOGIN_NAME = 'dbt'
+  MUST_CHANGE_PASSWORD = FALSE
+  DEFAULT_WAREHOUSE = 'COMPUTE_WH'
+  DEFAULT_ROLE = TRANSFORM
+  DEFAULT_NAMESPACE = 'MOVIELENS.RAW'
+  COMMENT = 'DBT user used for data transformation';
+
+ALTER USER dbt SET TYPE = LEGACY_SERVICE;
+
+GRANT ROLE TRANSFORM TO USER dbt;
+
+
+-- Step 5: Create database and schema
+CREATE DATABASE IF NOT EXISTS MOVIELENS;
+
+CREATE SCHEMA IF NOT EXISTS MOVIELENS.RAW;
+
+
+-- Step 6: Grant permissions to TRANSFORM role
+
+-- Warehouse access
+GRANT ALL ON WAREHOUSE COMPUTE_WH
+TO ROLE TRANSFORM;
+
+-- Database access
+GRANT ALL ON DATABASE MOVIELENS
+TO ROLE TRANSFORM;
+
+-- Existing schemas
+GRANT ALL ON ALL SCHEMAS IN DATABASE MOVIELENS
+TO ROLE TRANSFORM;
+
+-- Future schemas
+GRANT ALL ON FUTURE SCHEMAS IN DATABASE MOVIELENS
+TO ROLE TRANSFORM;
+
+-- Existing tables
+GRANT ALL ON ALL TABLES IN SCHEMA MOVIELENS.RAW
+TO ROLE TRANSFORM;
+
+-- Future tables
+GRANT ALL ON FUTURE TABLES IN SCHEMA MOVIELENS.RAW
+TO ROLE TRANSFORM;
