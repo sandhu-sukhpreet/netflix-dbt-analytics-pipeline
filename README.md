@@ -217,23 +217,23 @@ Possible next steps for this project include:
 
 ### Snowflake Raw Tables
 
-![Snowflake Raw Tables](screenshots/snowflake_raw_tables.jpg)
+![Snowflake Raw Tables](screenshots/snowflake_raw_tables.png)
 
 ### S3 Dataset Files
 
-![S3 Dataset](screenshots/s3_dataset_files.jpg)
+![S3 Dataset](screenshots/s3_dataset_files.png)
 
 ### dbt Project Structure
 
-![dbt Project](screenshots/dbt_project_structure.jpg)
+![dbt Project](screenshots/dbt_project_structure.png)
 
 ### dbt Run Execution
 
-![dbt Run](screenshots/dbt_run_success.jpg)
+![dbt Run](screenshots/dbt_run_success.png)
 
 ### Analytics Query Result
 
-![Analytics Query](screenshots/analytics_query_result.jpg)
+![Analytics Query](screenshots/analytics_query_result.png)
 
 
 
