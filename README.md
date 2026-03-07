@@ -28,11 +28,11 @@ Analytics Tables (Dimensions & Facts)
 
 ## Technologies Used
 
-- Amazon S3 – raw data storage  
-- Snowflake – cloud data warehouse  
-- dbt Core – SQL-based data transformation  
-- SQL – data modeling and analysis  
-- Git & GitHub – version control  
+- Amazon S3 - raw data storage  
+- Snowflake - cloud data warehouse  
+- dbt Core - SQL-based data transformation  
+- SQL - data modeling and analysis  
+- Git & GitHub - version control  
 
 ---
 
