@@ -100,22 +100,30 @@ Mart Models
 
 ## Repository Structure
 
-netflix-dbt-analytics-pipeline  
-│  
-├── dbt_project  
-│   └── models  
-│       ├── staging  
-│       └── marts  
-│  
-├── screenshots  
-│  
-├── sql  
-│   ├── setup_snowflake.sql  
-│   ├── create_tables.sql  
-│   └── load_data_snowflake.sql  
-│  
-├── .gitignore  
-└── README.md  
+netflix-dbt-analytics-pipeline
+│
+├── dbt_project
+│   └── models
+│       ├── staging
+│       └── marts
+│
+├── docs
+│   └── architecture.png
+│
+├── screenshots
+│   ├── snowflake_raw_tables.png
+│   ├── s3_dataset_files.png
+│   ├── dbt_project_structure.png
+│   ├── dbt_run_success.png
+│   └── analytics_query_result.png
+│
+├── sql
+│   ├── setup_snowflake.sql
+│   ├── create_tables.sql
+│   └── load_data_snowflake.sql
+│
+├── .gitignore
+└── README.md
 
 ---
 
