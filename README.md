@@ -70,14 +70,14 @@ A Snowflake environment was configured with:
 
 Raw tables were created in the RAW schema and populated using Snowflake's COPY INTO command from the S3 stage.
 
+```
 Example:    COPY INTO RAW_MOVIES
             FROM @NETFLIXSTAGE/movies.csv
             FILE_FORMAT = (
             TYPE = 'CSV'
             SKIP_HEADER = 1
             );
-
-
+```
 
 
 ### Data Transformation (dbt)
@@ -100,6 +100,7 @@ Mart Models
 
 ## Repository Structure
 
+```
 netflix-dbt-analytics-pipeline
 │
 ├── dbt_project
@@ -124,7 +125,7 @@ netflix-dbt-analytics-pipeline
 │
 ├── .gitignore
 └── README.md
-
+```
 ---
 
 ## How to Reproduce This Project
