@@ -127,6 +127,138 @@ netflix-dbt-analytics-pipeline
 
 ---
 
+## How to Reproduce This Project
+
+### Prerequisites
+
+Before running this project, ensure you have the following:
+
+- An **AWS account**
+- A **Snowflake account**
+- **Python installed**
+- **dbt Core installed**
+- **AWS CLI configured**
+- Access to the **MovieLens 20M Dataset**
+
+---
+
+### 1. Clone the Repository
+
+Clone the repository and move into the project directory.
+
+```bash
+git clone https://github.com/sandhu-sukhpreet/netflix-dbt-analytics-pipeline.git
+cd netflix-dbt-analytics-pipeline
+
+
+### 2. Download the Dataset
+
+Download the **MovieLens 20M Dataset** and extract the following files:
+
+- `movies.csv`
+- `ratings.csv`
+- `tags.csv`
+- `genome-scores.csv`
+- `genome-tags.csv`
+- `links.csv`
+
+Place these files in a local folder (for example `data/`) before uploading them to S3.
+
+### 3. Upload Raw Data to Amazon S3
+
+Create an S3 bucket (example):  netflix-dbt-project-<your-name>
+
+Upload the dataset files to the bucket:
+
+```bash
+aws s3 cp ./data/ s3://netflix-dbt-project-<your-name>/raw/ --recursive
+
+This bucket will serve as the raw storage layer for the pipeline.
+
+
+### 4. Configure the Snowflake Environment
+
+Run the Snowflake setup script located in the `sql/` folder: sql/setup_snowflake.sql
+
+This script:
+
+- creates roles  
+- creates warehouse  
+- creates database and schema  
+- creates a dbt service user  
+- grants required permissions
+
+
+### 5. Create Raw Tables
+
+Run the following script located in the `sql/` folder: sql/create_tables.sql
+
+This script creates the raw ingestion tables in Snowflake.
+
+Tables created:
+
+- `RAW_MOVIES`
+- `RAW_RATINGS`
+- `RAW_TAGS`
+- `RAW_GENOME_SCORES`
+- `RAW_GENOME_TAGS`
+- `RAW_LINKS`
+
+
+### 6. Load Data from S3 into Snowflake
+
+Run the following script located in the `sql/` folder: sql/load_data_snowflake.sql
+
+
+This script:
+
+- creates a Snowflake **stage connected to Amazon S3**
+- loads dataset files into the raw tables using the `COPY INTO` command
+
+Example command used inside the script:
+
+```sql
+COPY INTO RAW_MOVIES
+FROM @NETFLIXSTAGE/movies.csv
+FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1);
+
+
+### 7. Configure dbt
+
+Navigate to the dbt project folder and configure your `profiles.yml` file with your Snowflake credentials.
+
+Required fields include:
+
+- `account`
+- `user`
+- `password`
+- `role`
+- `warehouse`
+- `database`
+- `schema`
+
+
+### 8. Run dbt Transformations
+
+Run the dbt models to build the transformation layers.
+
+```bash
+dbt run
+
+To run dbt tests: dbt test
+
+
+### 9. Query the Analytics Tables
+
+After dbt finishes running, query the analytics-ready tables in Snowflake.
+
+Example tables created:
+
+- `dim_movies`
+- `fct_ratings`
+
+These tables are now ready for **analytics, reporting, and BI dashboards**.
+
 ## SQL Files
 
 ### setup_snowflake.sql
