@@ -14,15 +14,7 @@ The goal of this project is to showcase modern Analytics Engineering and Data En
 
 The data pipeline follows a modern ELT architecture.
 
-MovieLens Dataset  
-↓  
-Amazon S3 (Raw Storage)  
-↓  
-Snowflake Data Warehouse  
-↓  
-dbt Transformations  
-↓  
-Analytics Tables (Dimensions & Facts)
+![Architecture](docs/architecture.png)
 
 ---
 
