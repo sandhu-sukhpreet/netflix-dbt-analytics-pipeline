@@ -149,6 +149,7 @@ Clone the repository and move into the project directory.
 ```bash
 git clone https://github.com/sandhu-sukhpreet/netflix-dbt-analytics-pipeline.git
 cd netflix-dbt-analytics-pipeline
+```
 
 
 ### 2. Download the Dataset
@@ -172,6 +173,7 @@ Upload the dataset files to the bucket:
 
 ```bash
 aws s3 cp ./data/ s3://netflix-dbt-project-<your-name>/raw/ --recursive
+```
 
 This bucket will serve as the raw storage layer for the pipeline.
 
@@ -221,7 +223,7 @@ Example command used inside the script:
 COPY INTO RAW_MOVIES
 FROM @NETFLIXSTAGE/movies.csv
 FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1);
-
+```
 
 ### 7. Configure dbt
 
@@ -244,8 +246,12 @@ Run the dbt models to build the transformation layers.
 
 ```bash
 dbt run
+```
 
-To run dbt tests: dbt test
+To run dbt tests: 
+```bash
+dbt test
+```
 
 
 ### 9. Query the Analytics Tables
